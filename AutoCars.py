@@ -225,8 +225,6 @@ plot_cols2 = ["length",
 cond_hists(auto_prices, plot_cols2, 'drive_wheels')
 
 def cond_plot(cols):
-    import IPython.html.widgets
-    import seaborn as sns
     for col in cols:
         g = sns.FacetGrid(auto_prices, col="drive_wheels", row = 'body_style', 
                       hue="fuel_type", palette="Set2", margin_titles=True)
@@ -236,8 +234,6 @@ num_cols = ["curb_weight", "engine_size", "city_mpg"]
 cond_plot(num_cols)    
 
 def cond_plot(cols):
-    import IPython.html.widgets
-    import seaborn as sns
     for col in cols:
         g = sns.FacetGrid(auto_prices, col="drive_wheels", row = 'body_style', 
                       hue="fuel_type", palette="Set2", margin_titles=True)

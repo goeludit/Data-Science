@@ -1,11 +1,9 @@
 
-setwd(choose.dir())
-getwd()
-view(mydata)
 
-mydata<-read.csv(choose.files())
+mydata<-read.csv("C:\\Users\\Udit Goel\\Desktop\\Files\\Projects\\ML DS\\Car Sales (R)\\Car_sales.csv")
 
-# user written function for creating descriptive statistics
+
+# user written function for creating descriptive statistic
 mystats <- function(x) {
   nmiss<-sum(is.na(x))
   a <- x[!is.na(x)]
@@ -31,9 +29,10 @@ mystats <- function(x) {
 
 vars <- c( "Sales_in_thousands" , "X__year_resale_value" ,  "Price_in_thousands",   
            "Engine_size" , "Horsepower", "Wheelbase" , "Width" ,"Power_perf_factor" , "Length" , "Curb_weight" , 
-            "Fuel_capacity", "Fuel_efficiency" )
+           "Fuel_capacity", "Fuel_efficiency" )
 
 diag_stats<-t(data.frame(apply(mydata[vars], 2, mystats)))
+diag_stats
 
 # Writing Summary stats to external file
 
@@ -48,8 +47,10 @@ mydata$Price_in_thousands[mydata$Price_in_thousands>70.4457144064253] <-70.44571
 mydata<- mydata[!is.na(mydata$Sales_in_thousands),] # dropping obs where DV=missing
 require(Hmisc)
 mydata1<-data.frame(apply(mydata[vars],2, function(x) impute(x, mean))) #Imputing missings with mean for IV's
-
+mydata1
 mydat2<-cbind(mydata1,Vehicle_type=mydata$Vehicle_type )
+
+
 #R code for categorical variables(Converting as factor variable)
 
 mydat2$Vehicle_type <- factor(mydat2$Vehicle_type)
@@ -65,7 +66,7 @@ fit <- lm(Sales_in_thousands ~ X__year_resale_value + Price_in_thousands+ Engine
           +Length+Curb_weight+Fuel_capacity+Fuel_efficiency+Vehicle_type, data=mydat2)
 
 fit2 <- lm(ln_sales ~ X__year_resale_value + Price_in_thousands+ Engine_size+Wheelbase+Width
-          +Length+Curb_weight+Fuel_capacity+Fuel_efficiency+Vehicle_type, data=mydat2)
+           +Length+Curb_weight+Fuel_capacity+Fuel_efficiency+Vehicle_type, data=mydat2)
 
 summary(fit) # show results
 summary(fit2)
@@ -86,11 +87,6 @@ summary(fit3)
 library(car)
 vif(fit3)
 
-mydat3<-cbind(mydat2, ln_sales_p=predict(fit), sales_p=exp(predict(fit)) )
-
-scale(mydat2)
-
-View(test)
 
 
 # Other useful functions 
@@ -102,25 +98,25 @@ residuals(fit) # residuals
 anova(fit) # anova table 
 influence(fit) # regression diagnostics
 
-# diagnostic plots 
+#diagnostic plots 
 layout(matrix(c(1,2,3,4),2,2)) # optional 4 graphs/page 
 plot(fit)
+ 
+#Creating dummy variables
 
-#Creating dummy varibles
-
-mydata1$VT[mydata1$Vehicle_type ==  "Passenger"] <- 1
-mydata1$VT[mydata1$Vehicle_type ==  "Car"] <- 0
+mydata1$VT[mydata$Vehicle_type ==  "Passenger"] <- 1
+mydata1$VT[mydata$Vehicle_type ==  "Car"] <- 0
 
 summary(fit)
 
-
-############################### SCoring Data sets/Predicting the sales#####################################
+mydata1
+############################### Scoring Data sets/Predicting the sales#####################################
 mydata1$Ln_pre_sales<- (-2.321593  +
-                         mydata1$Price_in_thousands* -0.054988 +
-                         mydata1$Engine_size*0.254696  +
-                         mydata1$Wheelbase*0.047546	+
-                         mydata1$Fuel_efficiency*0.068975+
-                         mydata1$VT*-0.573255)
+                          mydata1$Price_in_thousands* -0.054988 +
+                          mydata1$Engine_size*0.254696  +
+                          mydata1$Wheelbase*0.047546	+
+                          mydata1$Fuel_efficiency*0.068975+
+                          mydata1$VT*-0.573255)
 mydata1$Pre_sales= exp(mydata1$Ln_pre_sales);
 
 #################### Creating Deciles####################################
@@ -136,7 +132,7 @@ xtabs(~decile,mydata1)
 write.csv(mydata1,"mydata1.csv")
 
 
-##################################Decile Analysis Reports
+##################################Decile Analysis Reports##
 
 require(sqldf)
 mydata1_DA <- sqldf("select decile, count(decile) as count, avg(Pre_sales) as avg_pre_sales,   avg(Sales_in_thousands) as sum_Actual_sales,
@@ -147,7 +143,6 @@ mydata1_DA <- sqldf("select decile, count(decile) as count, avg(Pre_sales) as av
 
 write.csv(mydata1_DA,"mydata1_DA.csv")
 
-getwd()
 
 ###################################END OF REGRESSION case study 
 

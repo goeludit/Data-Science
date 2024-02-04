@@ -4,9 +4,11 @@
 Ridesharing services such as Uber and Lyft have become revolutionary in the ever-changing urban transportation market, providing millions of users with flexible and convenient mobility options.
 
 
+<p>
 <img src="https://github.com/goeludit/Data-Science/blob/main/Price%20Prediction%20Uber-Lyft/Images/uber-logo.jpg?raw=true" alt="Girl in a jacket" height="150">
-
 <img src="https://github.com/goeludit/Data-Science/blob/main/Price%20Prediction%20Uber-Lyft/Images/Emblem-Lyft.jpg?raw=true" alt="Girl in a jacket" height="150" style="vertical-align: top;">
+
+</p>
 
 # Objective
 The objective of this project is to develop a robust and accurate price prediction model for ridesharing services, specifically targeting Uber and Lyft. The goal is to create a model that can estimate the fare for a ride based on various factors such as distance, time, location, an otential surge pricing for the boston dataset. 

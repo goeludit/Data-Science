@@ -61,9 +61,11 @@ capabilities of training algorithms. However, it also underscores the need for a
 better theoretical understanding of why these models perform as they do, which
 remains a significant challenge in the field of machine learning.
 
-graphs[src*='#center'] {
-    display: block;
-    margin: auto;
-}
-![graphs](https://github.com/goeludit/Data-Science/blob/main/Generelization%20of%20Neural%20Networks/Images/Graphs_1.png)
-![graphs](https://github.com/goeludit/Data-Science/blob/main/Generelization%20of%20Neural%20Networks/Images/Graphs_2.png)
+<p align="center">
+  <img src="https://github.com/goeludit/Data-Science/blob/main/Generelization%20of%20Neural%20Networks/Images/Graphs_1.png" alt="Sublime's custom image"/>
+</p>
+
+<p align="center">
+  <img src="https://github.com/goeludit/Data-Science/blob/main/Generelization%20of%20Neural%20Networks/Images/Graphs_2.png" alt="Sublime's custom image"/>
+</p>
+
